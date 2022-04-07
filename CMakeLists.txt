@@ -96,11 +96,7 @@ file(GLOB apps_sources ${PROJECT_SOURCE_DIR}/misc/apps/*.cc)
 find_package(GSL REQUIRED)
   include_directories(${GSL_INCLUDE_DIRS})
   set(gyronimo_depending_libs ${gyronimo_depending_libs} ${GSL_LIBRARIES})
-<<<<<<< HEAD
-find_package(Boost 1.71.0 REQUIRED)
-=======
 find_package(Boost REQUIRED)
->>>>>>> parent of c70bfa6 (Fix compiling issues with VMEC and OpenMP support)
   include_directories(${Boost_INCLUDE_DIRS})
 # add libraries needed to provide VMEC support
 if(BUILD_VMEC_SUPPORT)
