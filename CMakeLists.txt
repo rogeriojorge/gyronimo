@@ -112,9 +112,9 @@ if(BUILD_VMEC_SUPPORT)
     message(SEND_ERROR "ncxx4-config not found. Please install Unidata's netCDF-CXX4 package")
   endif()
   string(STRIP ${netcdf_cxx_libs} netcdf_cxx_libs)
-  separate_arguments(netcdf_cxx_libs)
+#   separate_arguments(netcdf_cxx_libs)
   string(STRIP ${netcdf_cxx_flags} netcdf_cxx_flags)
-  separate_arguments(netcdf_cxx_flags)
+#   separate_arguments(netcdf_cxx_flags)
 #   list(REMOVE_ITEM gyronimo_sources
 #     ${PROJECT_SOURCE_DIR}/gyronimo/parsers/parser_vmec.cc
 #   )
