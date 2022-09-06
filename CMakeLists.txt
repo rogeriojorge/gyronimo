@@ -112,16 +112,7 @@ if(BUILD_VMEC_SUPPORT)
     message(SEND_ERROR "ncxx4-config not found. Please install Unidata's netCDF-CXX4 package")
   endif()
   string(STRIP ${netcdf_cxx_libs} netcdf_cxx_libs)
-#   separate_arguments(netcdf_cxx_libs)
   string(STRIP ${netcdf_cxx_flags} netcdf_cxx_flags)
-#   separate_arguments(netcdf_cxx_flags)
-#   list(REMOVE_ITEM gyronimo_sources
-#     ${PROJECT_SOURCE_DIR}/gyronimo/parsers/parser_vmec.cc
-#   )
-#   list(REMOVE_ITEM apps_sources
-#     ${PROJECT_SOURCE_DIR}/misc/apps/vmecdump.cc
-#     ${PROJECT_SOURCE_DIR}/misc/apps/vmectrace.cc
-#   )
 else()
     # remove all VMEC related gyronimo and apps sources
     message(STATUS "Not building VMEC support!")
@@ -138,12 +129,13 @@ endif()
 # builds gyronimo library:
 add_library(gyronimo SHARED ${gyronimo_sources})
 set_target_properties(gyronimo PROPERTIES VERSION ${PROJECT_VERSION})
-target_include_directories(gyronimo PUBLIC ${PROJECT_SOURCE_DIR})
-target_link_libraries(gyronimo PUBLIC ${gyronimo_depending_libs})
-target_compile_features(gyronimo PRIVATE cxx_std_20)
-if(BUILD_VMEC_SUPPORT)
-  target_compile_options(gyronimo PUBLIC ${netcdf_cxx_flags})
-  target_compile_options(gyronimo PUBLIC ${netcdf_cxx_libs})
+if(NOT BUILD_VMEC_SUPPORT)
+  target_include_directories(gyronimo PUBLIC ${PROJECT_SOURCE_DIR})
+  target_link_libraries(gyronimo PUBLIC ${gyronimo_depending_libs})
+else()
+  # target_link_libraries(gyronimo PUBLIC ${gyronimo_depending_libs} PkgConfig::netcdf-cxx4)
+  target_include_directories(gyronimo PUBLIC ${PROJECT_SOURCE_DIR} ${netcdf_cxx_flags})
+  target_link_libraries(gyronimo PUBLIC ${gyronimo_depending_libs} ${netcdf_cxx_libs})
 endif()
 
 # builds the apps:
