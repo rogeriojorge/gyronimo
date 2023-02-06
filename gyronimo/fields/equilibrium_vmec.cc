@@ -24,8 +24,8 @@ namespace gyronimo{
 
 equilibrium_vmec::equilibrium_vmec(
     const metric_vmec *g, const interpolator1d_factory *ifactory)
-    : IR3field_c1(abs(g->parser()->B_0()), 1.0, g), metric_(g),
-      xm_nyq_(g->parser()->xm_nyq()), xn_nyq_(g->parser()->xn_nyq()),   
+    : IR3field_c1(1.0, 1.0, g),//abs(g->parser()->B_0()), 1.0, g),
+      metric_(g), xm_nyq_(g->parser()->xm_nyq()), xn_nyq_(g->parser()->xn_nyq()),   
       bmnc_(nullptr), bsupumnc_(nullptr), bsupvmnc_(nullptr) {
   const parser_vmec *p = metric_->parser();
   dblock_adapter s_range(p->radius());
