@@ -22,6 +22,7 @@
 
 #include <gsl/gsl_spline2d.h>
 #include <gyronimo/interpolators/interpolator2d.hh>
+#include <algorithm>
 
 namespace gyronimo {
 
