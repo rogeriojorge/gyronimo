@@ -20,6 +20,7 @@
 #ifndef GYRONIMO_EIGENMODE_CASTOR_B
 #define GYRONIMO_EIGENMODE_CASTOR_B
 
+#include <numbers>
 #include <gyronimo/fields/IR3field_c1.hh>
 #include <gyronimo/parsers/parser_castor.hh>
 #include <gyronimo/metrics/metric_helena.hh>
