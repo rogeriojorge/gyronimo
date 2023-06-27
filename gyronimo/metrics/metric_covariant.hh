@@ -22,6 +22,7 @@
 
 #include <gyronimo/core/IR3algebra.hh>
 #include <gyronimo/core/SM3algebra.hh>
+#include <cmath>
 
 namespace gyronimo {
 
