@@ -109,7 +109,7 @@ file(GLOB apps_sources ${PROJECT_SOURCE_DIR}/misc/apps/*.cc)
 find_package(GSL REQUIRED)
   include_directories(${GSL_INCLUDE_DIRS})
   set(gyronimo_depending_libs ${gyronimo_depending_libs} ${GSL_LIBRARIES})
-find_package(Boost 1.73.0 REQUIRED)
+find_package(Boost REQUIRED)
   include_directories(${Boost_INCLUDE_DIRS})
 
 # add libraries needed to provide openMP support if required
@@ -149,7 +149,8 @@ else()
       ${PROJECT_SOURCE_DIR}/gyronimo/metrics/metric_vmec.cc
       ${PROJECT_SOURCE_DIR}/gyronimo/parsers/parser_vmec.cc
       ${PROJECT_SOURCE_DIR}/gyronimo/metrics/morphism_vmec.cc
-      ${PROJECT_SOURCE_DIR}/gyronimo/fields/equilibrium_vmec.cc)
+      ${PROJECT_SOURCE_DIR}/gyronimo/fields/equilibrium_vmec.cc
+      )
   list(REMOVE_ITEM apps_sources
       ${PROJECT_SOURCE_DIR}/misc/apps/vmecdump.cc
       ${PROJECT_SOURCE_DIR}/misc/apps/vmectrace.cc)
