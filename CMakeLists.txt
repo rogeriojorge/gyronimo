@@ -28,15 +28,15 @@ endif()
 set(version_major_regex "[ \t]*constexpr int version_major = ([0-9]+);")
 set(version_minor_regex "[ \t]*constexpr int version_minor = ([0-9]+);")
 set(version_patch_regex "[ \t]*constexpr int version_patch = ([0-9]+);")
-file(STRINGS ${CMAKE_SOURCE_DIR}/gyronimo/version.hh
+file(STRINGS ${CMAKE_CURRENT_LIST_DIR}/gyronimo/version.hh
   string_to_replace REGEX ${version_major_regex})
 string(REGEX REPLACE
   ${version_major_regex} "\\1" version_major ${string_to_replace})
-file(STRINGS ${CMAKE_SOURCE_DIR}/gyronimo/version.hh
+file(STRINGS ${CMAKE_CURRENT_LIST_DIR}/gyronimo/version.hh
   string_to_replace REGEX ${version_minor_regex})
 string(REGEX REPLACE
   ${version_minor_regex} "\\1" version_minor ${string_to_replace})
-file(STRINGS ${CMAKE_SOURCE_DIR}/gyronimo/version.hh
+file(STRINGS ${CMAKE_CURRENT_LIST_DIR}/gyronimo/version.hh
   string_to_replace REGEX ${version_patch_regex})
 string(REGEX REPLACE
   ${version_patch_regex} "\\1" version_patch ${string_to_replace})
@@ -55,8 +55,8 @@ message("*  Configuring gyronimo-"
   ${version_string} " in " ${CMAKE_BUILD_TYPE} " mode:")
 
 # build options and their default values:
-option(SUPPORT_VMEC "Add support to VMEC equilibria" OFF)
-option(SUPPORT_OPENMP "Compiles with openMP support" OFF)
+option(SUPPORT_VMEC "Add support to VMEC equilibria" ON)
+option(SUPPORT_OPENMP "Compiles with openMP support" ON)
 
 # detect platform:
 string(COMPARE EQUAL "Darwin"  ${CMAKE_HOST_SYSTEM_NAME} OS_X)
@@ -148,6 +148,7 @@ else()
   list(REMOVE_ITEM gyronimo_sources
       ${PROJECT_SOURCE_DIR}/gyronimo/metrics/metric_vmec.cc
       ${PROJECT_SOURCE_DIR}/gyronimo/parsers/parser_vmec.cc
+      ${PROJECT_SOURCE_DIR}/gyronimo/metrics/morphism_vmec.cc
       ${PROJECT_SOURCE_DIR}/gyronimo/fields/equilibrium_vmec.cc)
   list(REMOVE_ITEM apps_sources
       ${PROJECT_SOURCE_DIR}/misc/apps/vmecdump.cc
@@ -216,7 +217,7 @@ endif()
 # installs gyronimo library:
 install(TARGETS gyronimo LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(
-  DIRECTORY ${CMAKE_SOURCE_DIR}/gyronimo
+  DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/gyronimo
   TYPE INCLUDE MESSAGE_NEVER FILES_MATCHING PATTERN "*.hh")
 
 # pkg-config support
